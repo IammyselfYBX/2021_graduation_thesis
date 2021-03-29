@@ -3,7 +3,7 @@
 cp * /usr/share/fonts/my-fonts/
 mkfontscale
 mkfontdir
-fc-cache
+fc-cache -fsv #刷新
 ```
 
 

@@ -14,23 +14,35 @@
 %\setmainfont{Times New Roman}             %设置正文字体为Times New Roman
 \usepackage{abstract} % 修改摘要
 
+
+%\usepackage[fontset=windows]{ctex}
+\usepackage{xeCJK} %调用系统中已安装的字体
+\setCJKmainfont{SimSun}
+\setmainfont{Times New Roman}
+
 %% 目录格式设置
-\usepackage[subfigure]{tocloft}      %必须这么写，否则会报错
+\usepackage{tocloft}      %必须这么写，否则会报错
 \renewcommand{\contentsname}{\centerline{\Large{\heiti{目\quad\quad 录}}}}
-\renewcommand{\cftchapleader}{\cftdotfill{0.6}} %设置chapter条目的引导点间距
+%\renewcommand{\cftchapleader}{\cftdotfill{0.6}} %设置chapter条目的引导点间距
 \renewcommand{\cftsecleader}{\cftdotfill{0.6}}
 \renewcommand{\cftsubsecleader}{\cftdotfill{0.6}}
 \renewcommand{\cftsubsubsecleader}{\cftdotfill{0.6}}
 %\renewcommand{\cftchapfont}{\hts}    %设置chapter条目的字体
 \renewcommand{\cftsecfont}{\heiti}    %设置section条目的字体
 \renewcommand{\cftsecfont}{\Large}    %设置section条目的四号
-\renewcommand{\cftsubsecfont}{\SimSun} %设置subsection条目的字体
+\renewcommand{\cftsubsecfont}{\songti} %设置subsection条目的字体
 \renewcommand{\cftsubsecfont}{\large} %设置subsection条目的字体
-\renewcommand{\cftsubsubsecfont}{\SimSun} %设置subsection条目的字体
+\renewcommand{\cftsubsubsecfont}{\songti} %设置subsection条目的字体
 \renewcommand{\cftsubsubsecfont}{\large} %设置subsection条目的字体
 
+% 参考文献
+%\usepackage{cite}
 
 \begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \begin{flushright}
 \end{flushright}
 \begin{center}
@@ -61,7 +73,7 @@
 \end{center}
 \begin{center}
         \vskip 2.5cm
-		{贰〇贰壹} 年{\quad 六\quad }月{\qquad \qquad }日
+		{2021} 年{\quad 六\quad }月{\qquad \qquad }日
 		
 \end{center}
 \thispagestyle{empty} %去除本页页码
@@ -75,22 +87,19 @@
 \newpage
 \pagenumbering{Roman}
 \renewcommand{\abstractname}{\heiti{\Large{摘\quad \quad \quad \quad 要}}}
-\\
-
 \begin{abstract}
-\SimSun{\large{不要少于400字该部分内容是放置摘要信息的。该部分内容是放置摘要信息的。该部分内容是放置摘要信息的。该部分内容是放置摘要信息的。该部分内容是放置摘要信息的。}}
+{\large{不要少于400字该部分内容是放置摘要信息的。该部分内容是放置摘要信息的。该部分内容是放置摘要信息的。该部分内容是放置摘要信息的。该部分内容是放置摘要信息的。}}
 
-\\ \hspace*{\fill} \\  %换行，用空格填充，再换行，即可实现空出一整行的效果,不需任何环境调整
+%\\ \hspace*{\fill} \\  %换行，用空格填充，再换行，即可实现空出一整行的效果,不需任何环境调整
 \noindent %取消首航缩进
-    \SimSun{\large{\textbf{关键字}：RISC-V，Qemu，linux}}
+    {\large{\textbf{关键字}：RISC-V，Qemu，linux}}
 \end{abstract}
 
 %%% 英文摘要
 \newpage
-\renewcommand{\abstractname}{\TimesNewRoman{\Large\textbf{ABSTRACT}}}
-\\
+\renewcommand{\abstractname}{\Large \textbf{ABSTRACT}}
 \begin{abstract}
-    \TimesNewRoman{\large{This section is where the summary information is placed.This section is where the summary information is placed.This section is where the summary information is placed.}}
+{\large{This section is where the summary information is placed.This section is where the summary information is placed.This section is where the summary information is placed.}}
 
 \noindent
 \textbf{KEY WORDS:}RISC-V,Qemu,linux
@@ -111,18 +120,42 @@
 %%% section
 \CTEXsetup[name={第,章 },format={\centering\heiti\zihao{-2}},aftername={\enspace},beforeskip={24bp},afterskip={18bp}]{section} %name选项中不要使用中文逗号 \zihao(-2)字号小二
 %%% subsection
-\CTEXsetup[format={\raggedright\SimSun\zihao{-3}},aftername={\enspace},beforeskip={24bp},afterskip={6bp}]{subsection}
+\CTEXsetup[format={\raggedright\songti\zihao{-3}},aftername={\enspace},beforeskip={24bp},afterskip={6bp}]{subsection}
 %%% subsubsection
-\CTEXsetup[format={\raggedright\SimSun\zihao{4}},aftername={\enspace},beforeskip={12bp},afterskip={6bp}]{subsubsection}
+\CTEXsetup[format={\raggedright\songti\zihao{4}},aftername={\enspace},beforeskip={12bp},afterskip={6bp}]{subsubsection}
 
-\section{一级标题}
-\subsection{二级标题}
+\section{背景意义}
+Risc-v是一个最近流行基于RISC指令集架构，类似与软件领域开源的linux一样，Risc-V也有很多领域可以发挥作用。
+
+\section{Risc-V模拟器原理}
+\subsection{KVM \& Qemu}
+首先Qemu(Quick Emulator)本身并不完全是KVM的一部分，它是一套由软件模拟实现的。
+
+而KVM(Kernel Virtual Machine)是有两部分组成，一部分是Linux内核的KVM模块，另一块是经过简化后的Qemu。它能够让Linux主机成为一个Hypervisor（虚拟机监控器）。在支持VMX（Virtual Machine Extension）功能的x86处理器中，Linux在原有的用户模式和内核模式中新增加了客户模式，并且客户模式也拥有自己的内核模式和用户模式，虚拟机就是运行在客户模式中。三层结构如 图\ref{fig:kvm}
+
+\begin{figure}[htbp]
+  \centering %居中显示
+  \includegraphics[width=0.6 \textwidth]{figs/KVM三种模式的层次关系.png}
+  \caption{KVM三种模式的层次关系}
+  \label{fig:kvm} %设置图形引用名称
+\end{figure}
+%『h』当前位置。将图形放置在正文文本中给出该图形环境的地方。如果本页所剩的页面不够，这一参数将不起作用。
+%『t』顶部。将图形放置在页面的顶部。
+%『b』底部。将图形放置在页面的底部。
+%『p』浮动页。将图形放置在一只允许有浮动对象的页面上。
+
+
 \subsubsection{三级标题}
 正文内容
-\section{一级标题}
+\subsection{根文件系统}
+\subsubsection{Dropbear}
+Dropbear是一个相对较小的SSH服务器和客户端。它运行在一个基于POSIX的各种平台，依赖zlib连接库。
 
 
-\section{一级标题}
 
+\section{方案}
+
+
+\section{与前人比较}
 
 \end{document}
