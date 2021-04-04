@@ -1,9 +1,11 @@
-% 华电毕业论文封面 
 \documentclass[UTF8,a4paper]{ctexart}
 \usepackage{geometry} % 设置页边距，页面大小
 \geometry{left=2.5cm,right=2.0cm,top=2.50cm,bottom=2.0cm}
 \linespread{1.3}%调整行间距
 \usepackage{graphicx} % 引入图片
+%\usepackage[justification=centering]{caption} % 图片的caption居中
+\usepackage[indent]{caption} % 设置图片的 caption 换行缩进
+
 \pagestyle{plain}    
 \usepackage{setspace} %行间距
 \usepackage{array} %
@@ -14,11 +16,20 @@
 %\setmainfont{Times New Roman}             %设置正文字体为Times New Roman
 \usepackage{abstract} % 修改摘要
 
-
 %\usepackage[fontset=windows]{ctex}
 \usepackage{xeCJK} %调用系统中已安装的字体
 \setCJKmainfont{SimSun}
 \setmainfont{Times New Roman}
+%% 支持汉字加粗
+\let\heiti\relax % 黑体
+\newCJKfontfamily\heiti{SimHei}[AutoFakeBold]
+\setCJKsansfont{SimHei}[AutoFakeBold]
+
+\let\songti\relax % 宋体
+\newCJKfontfamily\songti{SimSun}[AutoFakeBold]
+\setCJKmainfont{SimSun}[AutoFakeBold]  
+
+
 
 %% 目录格式设置
 \usepackage{tocloft}      %必须这么写，否则会报错
@@ -35,102 +46,65 @@
 \renewcommand{\cftsubsubsecfont}{\songti} %设置subsection条目的字体
 \renewcommand{\cftsubsubsecfont}{\large} %设置subsection条目的字体
 
+
+% 数学公式
+\usepackage{amsmath}
+
+% 插入代码块
+\usepackage{listings}
+\usepackage{xcolor}
+\lstset{
+ %language=bash,                % the language of the code
+ columns=fixed,       
+% numbers=left,                                        % 在左侧显示行号
+% numberstyle=\tiny\color{gray},                       % 设定行号格式
+ frame=none,                                          % 不显示背景边框
+ backgroundcolor=\color[RGB]{245,245,244},            % 设定背景颜色
+ keywordstyle=\color[RGB]{40,40,255},                 % 设定关键字颜色
+ numberstyle=\footnotesize\color{darkgray},           
+ commentstyle=\it\color[RGB]{0,96,96},                % 设置代码注释的格式
+% stringstyle=\rmfamily\slshape\color[RGB]{128,0,0},   % 设置字符串格式
+}
+
+
 % 参考文献
 \usepackage{cite}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  以下是论文内容
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  正文
 \begin{document}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\begin{flushright}
-\end{flushright}
-\begin{center}
-    \vskip 1.5cm
-    \includegraphics[scale=0.6]{figs/ncepu.eps}%学校图标
-\end{center}
-\begin{center}
-    \vskip 1.5cm
-    \includegraphics[scale=0.6]{figs/bthesistitle.eps}%毕业设计图标
-\end{center}
-\begin{center}
-  \vskip 2cm
-    \fontsize{15}{1} \textbf{题目} \underline{基于Qemu模拟器移植rCore操作系统的开发与实现}
-	\vskip 2.5cm
-\end{center}
-\begin{center}
-	\begin{tabular}{l}
-		
-		院\quad\quad 系 \underline{\qquad 控制与计算机工程学院 \quad }\\\\
-		专\quad\quad 业 \underline{\qquad 计算机科学与技术 \quad\qquad}\\\\
-		% \quad 代表空格，输入题目后自己调长度
-		班\quad\quad 级 \underline{\qquad\quad 计算1702班 \quad\qquad\quad }\\\\
-		学生姓名 \underline{\qquad\qquad 杨秉学\qquad\qquad\qquad}\\\\
-		学\quad\quad 号 \underline{\qquad\quad 120171080212 \qquad\qquad }\\\\
-		指导教师 \underline{\qquad\qquad\quad 琚贇\qquad\qquad\qquad }\\\\
-	
-	\end{tabular}
-\end{center}
-\begin{center}
-        \vskip 2.5cm
-		{2021} 年{\quad 六\quad }月{\qquad \qquad }日
-		
-\end{center}
-\thispagestyle{empty} %去除本页页码
-
-
-      
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%摘要
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% 中文摘要
-\newpage
-\pagenumbering{Roman}
-\renewcommand{\abstractname}{\heiti{\Large{摘\quad \quad \quad \quad 要}}}
-\begin{abstract}
-{\large{不要少于400字该部分内容是放置摘要信息的。该部分内容是放置摘要信息的。该部分内容是放置摘要信息的。该部分内容是放置摘要信息的。该部分内容是放置摘要信息的。}}
-
-%\\ \hspace*{\fill} \\  %换行，用空格填充，再换行，即可实现空出一整行的效果,不需任何环境调整
-\noindent %取消首航缩进
-    {\large{\textbf{关键字}：RISC-V，Qemu，linux}}
-\end{abstract}
-
-%%% 英文摘要
-\newpage
-\renewcommand{\abstractname}{\Large \textbf{ABSTRACT}}
-\begin{abstract}
-{\large{This section is where the summary information is placed.This section is where the summary information is placed.This section is where the summary information is placed.}}
-
-\noindent
-\textbf{KEY WORDS:}RISC-V,Qemu,linux
-\end{abstract}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 目录
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 封面
+\input{part/cover}      
+%%摘要
+%%%% 中文摘要
+\input{part/abstract/chinese}
+%%%% 英文摘要
+\input{part/abstract/english}
+%% 目录
 \newpage
 \tableofcontents
 \thispagestyle{empty}
-%\input{part/part1}\newpage
-%\input{part/part2}\newpage
 
+%% 章节
 \newpage
 \pagenumbering{arabic}
-%%定制标题样式
-%%% section
+%%%%定制标题样式
+%%%%% section
 \CTEXsetup[name={第,章 },format={\centering\heiti\zihao{-2}},aftername={\enspace},beforeskip={24bp},afterskip={18bp}]{section} %name选项中不要使用中文逗号 \zihao(-2)字号小二
-%%% subsection
+%%%%% subsection
 \CTEXsetup[format={\raggedright\songti\zihao{-3}},aftername={\enspace},beforeskip={24bp},afterskip={6bp}]{subsection}
-%%% subsubsection
+%%%%% subsubsection
 \CTEXsetup[format={\raggedright\songti\zihao{4}},aftername={\enspace},beforeskip={12bp},afterskip={6bp}]{subsubsection}
 
-\input{part/background}  % 介绍背景
-\input{part/RISC-V_principle} %介绍RISC-V模拟器的原理
-\input{part/compare}  %与前人比较
+\input{part/background}\newpage  % 课题研究背景和意义
+\input{part/process}\newpage % 相关工作
+\input{part/RISC-V_principle}\newpage %介绍RISC-V模拟器的原理
+% 性能评估
+\input{part/compare}\newpage  %与前人比较
 
 
-根据 David A. Patterson 的著作\cite{2006Computer}
-
+%% 参考文献
 \bibliographystyle{plain}
 \bibliography{Ref}
 %\bibliographystyle{plain}指定参考文献的呈现方式，常见的预设样式的可选项有8种，分别是：

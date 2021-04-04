@@ -1,0 +1,5 @@
+#!/bin/sh
+# /etc/init.d/libvirtd restart 
+sudo /etc/init.d/libvirtd start
+sudo virsh  net-start default
+sudo virt-manager

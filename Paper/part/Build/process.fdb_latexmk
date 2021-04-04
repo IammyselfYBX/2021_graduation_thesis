@@ -1,0 +1,14 @@
+# Fdb version 3
+["xdvipdfmx"] 0 "Build/process.xdv" "Build/process.pdf" "Build/process" 0
+  "Build/process.xdv" 0 -1 0 "xelatex"
+  (generated)
+  "Build/process.pdf"
+["xelatex"] 1617263695 "process.tex" "Build/process.xdv" "process" 1617263695
+  "/usr/local/texlive/2018/texmf-dist/web2c/texmf.cnf" 1522066949 33362 cf75436e19743e94a92a6b1b9183c434 ""
+  "/usr/local/texlive/2018/texmf-var/web2c/xetex/xelatex.fmt" 1592352749 3731937 ceeaec2a7cf92e04190fdc24367bbf88 ""
+  "/usr/local/texlive/2018/texmf.cnf" 1592352701 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
+  "Build/process.aux" 1617263695 8 a94a2480d3289e625eea47cd1b285758 ""
+  "process.tex" 1617263690 5928 4fb6f1885459ac6ccf8696f3fac3f806 ""
+  (generated)
+  "Build/process.log"
+  "Build/process.xdv"
